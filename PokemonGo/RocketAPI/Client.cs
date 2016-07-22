@@ -168,19 +168,19 @@ namespace PokemonGo.RocketAPI
                 DefaultIfEmpty(new {ItemId = MiscEnums.Item.ITEM_MASTER_BALL, Amount = 0}).FirstOrDefault().Amount;
 
             // Use better balls for high CP pokemon
-            if (masterBallsCount > 0 && pokemonCP >= 1000)
+            if (masterBallsCount > 0 && pokemonCP >= 2000)
             {
                 ColoredConsoleWrite(ConsoleColor.Green, $"[{DateTime.Now.ToString("HH:mm:ss")}] Master Ball is being used");
                 return MiscEnums.Item.ITEM_MASTER_BALL;
             }
 
-            if (ultraBallsCount > 0 && pokemonCP >= 600)
+            if (ultraBallsCount > 0 && pokemonCP >= 900)
             {
                 ColoredConsoleWrite(ConsoleColor.Green, $"[{DateTime.Now.ToString("HH:mm:ss")}] Ultra Ball is being used");
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
             }
 
-            if (greatBallsCount > 0 && pokemonCP >= 350)
+            if (greatBallsCount > 0 && pokemonCP >= 450)
             {
                 ColoredConsoleWrite(ConsoleColor.Green, $"[{DateTime.Now.ToString("HH:mm:ss")}] Great Ball is being used");
                 return MiscEnums.Item.ITEM_GREAT_BALL;

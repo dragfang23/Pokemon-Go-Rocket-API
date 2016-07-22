@@ -424,7 +424,7 @@ namespace PokemonGo.RocketAPI.Console
 
             var doNotTransfer = new[] //these will not be transferred even when below the CP threshold
             {
-                //PokemonId.Pidgey,
+                PokemonId.Pidgey,
                 //PokemonId.Rattata,
                 //PokemonId.Weedle,
                 //PokemonId.Zubat,
@@ -440,9 +440,35 @@ namespace PokemonGo.RocketAPI.Console
                 //PokemonId.Gastly,
                 //PokemonId.Goldeen,
                 //PokemonId.Staryu,
-                PokemonId.Magikarp,
-                PokemonId.Eevee//,
+                //okemonId.Magikarp,
+                //PokemonId.Eevee,
                 //PokemonId.Dratini
+            };
+
+            var includeList = new[]
+            {
+                //PokemonId.Pidgey,
+                PokemonId.Rattata,
+                PokemonId.Zubat,
+                PokemonId.Pidgeotto,
+                PokemonId.Squirtle,
+                //PokemonId.NidoranFemale,
+                //PokemonId.Paras,
+                //PokemonId.Venonat,
+                PokemonId.Psyduck,
+                PokemonId.Poliwag,
+                PokemonId.Slowpoke,
+                //PokemonId.Drowzee,
+                //PokemonId.Goldeen,
+                //PokemonId.Staryu,
+                //PokemonId.Jynx,
+                PokemonId.Eevee,
+                PokemonId.Krabby,
+                PokemonId.Horsea,
+                PokemonId.Spearow,
+                PokemonId.Fearow,
+                PokemonId.Gastly,
+                PokemonId.Dratini
             };
 
             var inventory = await client.GetInventory();
@@ -453,7 +479,8 @@ namespace PokemonGo.RocketAPI.Console
 
             //foreach (var unwantedPokemonType in unwantedPokemonTypes)
             {
-                var pokemonToDiscard = pokemons.Where(p => !doNotTransfer.Contains(p.PokemonId) && p.Cp < cpThreshold)
+                var pokemonToDiscard = pokemons.Where(p => !doNotTransfer.Contains(p.PokemonId)
+                && ((includeList.Contains(p.PokemonId) && p.Cp < cpThreshold) || IsSpecialCaseThreshold(p)))
                                                    .OrderByDescending(p => p.Cp)
                                                    .ToList();
 
@@ -465,6 +492,24 @@ namespace PokemonGo.RocketAPI.Console
             }
 
             ColoredConsoleWrite(ConsoleColor.Gray, $"[{DateTime.Now.ToString("HH:mm:ss")}] Finished grinding all the meat");
+        }
+
+        private static bool IsSpecialCaseThreshold(PokemonData p)
+        {
+            var dictionary = new Dictionary<PokemonId, int>()
+            {
+                {PokemonId.Magikarp, 150},
+                {PokemonId.Caterpie, 210},
+                {PokemonId.Weedle, 210},
+                {PokemonId.Drowzee, 640 },
+                {PokemonId.Goldeen, 500},
+                { PokemonId.Staryu, 500},
+                { PokemonId.Jynx, 900 },
+                { PokemonId.Slowpoke, 600 },
+                { PokemonId.Psyduck, 550}
+            };
+
+            return dictionary.ContainsKey(p.PokemonId) && p.Cp < dictionary[p.PokemonId];
         }
 
         public static async Task PrintLevel(Client client)

@@ -46,14 +46,14 @@ namespace PokemonGo.RocketAPI.Console
                 //Type and amount to keep
                 return new[]
                 {
-                    new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 20),
-                    new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 30),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 60),
                     new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
                     new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 200),
-                    new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 20),
-                    new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-                    new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 0),
-                    new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50)
+                    new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 15),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 5),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 30),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 80)
                 };
             }
 
